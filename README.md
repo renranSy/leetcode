@@ -59,9 +59,56 @@ var removeDuplicates = function(nums) {
 }
 ```
 
+## 169. 多数元素
 
+### （1）先排序，后找到多数元素
 
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function (nums) {
+    nums.sort()
+    let index = 0
+    let mark = 1
+    while (index < nums.length && mark < nums.length / 2) {
+        if (nums[index] === nums[index + 1]) {
+            mark++
+        } else {
+            mark = 1
+        }
+        index++
+    }
+    return nums[index]
+};
+```
 
+### （2）Boyer-Moore 投票算法
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function (nums) {
+    let index = 1
+    let value = nums[0]
+    let count = 1
+    while (index < nums.length) {
+        if (count === 0) {
+            value = nums[index]
+        }
+        if (nums[index] === value) {
+            count++
+        } else {
+            count--
+        }
+        index++
+    }
+    return value
+};
+```
 
 
 
