@@ -123,5 +123,62 @@ var rotate = function(nums, k) {
 };
 ```
 
+## 121. 买卖股票的最佳时机
 
+```javascript
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    let profit = 0
+    for (let i = 0; i < prices.length - 1; i++) {
+        for (let j = i + 1; j < prices.length; j++) {
+            if (prices[j] - prices[i] > profit) {
+                profit = prices[j] - prices[i]
+            }
+        }
+    }
+    return profit
+};
+```
+
+```javascript
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    let maxProfit = 0
+    let minPrice = prices[0]
+
+    for (let i = 0; i < prices.length; i++) {
+        if (prices[i] < minPrice) {
+            minPrice = prices[i]
+        } else if (prices[i] - minPrice > maxProfit) {
+            maxProfit = prices[i] - minPrice
+        }
+    }
+    return maxProfit
+};
+```
+
+## 125. 验证回文串
+
+```javascript
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+    const regex = /[^a-z0-9]/gi
+    s = s.replace(regex, '').toLowerCase()
+    for (let i = 0; i < s.length / 2; i++) {
+        if (s[i] !== s[s.length - 1 - i]) {
+            return false
+        }
+    }
+    return true
+};
+```
 
